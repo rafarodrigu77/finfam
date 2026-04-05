@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="es"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1">&lt;title&gt;Finance Dashboard&lt;/title&gt;</p>
+<p class="p1">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"&gt;&lt;/script&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>* { box-sizing: border-box; margin: 0; padding: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0e1a; color: #e8ecf4; min-height: 100vh; padding: 24px; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.header h1 { font-size: 22px; font-weight: 600; color: #fff; letter-spacing: -0.3px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.header .date { font-size: 13px; color: #6b7a99; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.month-pill { background: #1a2040; border: 0.5px solid #2a3460; padding: 6px 14px; border-radius: 20px; font-size: 13px; color: #8899cc; cursor: pointer; transition: background 0.2s; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.month-pill:hover { background: #1e2850; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card { background: #111827; border: 0.5px solid #1e2a45; border-radius: 14px; padding: 18px 20px; position: relative; overflow: hidden; transition: transform 0.2s, border-color 0.2s; cursor: default; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card:hover { transform: translateY(-2px); border-color: #2e3f6f; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card .accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 14px 14px 0 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card.blue .accent { background: linear-gradient(90deg, #1d4ed8, #3b82f6); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card.red .accent { background: linear-gradient(90deg, #dc2626, #ef4444); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card.green .accent { background: linear-gradient(90deg, #059669, #10b981); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card.amber .accent { background: linear-gradient(90deg, #d97706, #f59e0b); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card .label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: #4a5680; margin-bottom: 10px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card .value { font-size: 26px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card .change { font-size: 12px; margin-top: 6px; display: flex; align-items: center; gap: 4px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.up { color: #10b981; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.down { color: #ef4444; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.neutral { color: #6b7a99; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.grid2 { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; margin-bottom: 20px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.grid2b { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.panel { background: #111827; border: 0.5px solid #1e2a45; border-radius: 14px; padding: 20px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.panel-title { font-size: 13px; font-weight: 600; color: #9aaad4; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.panel-title span { font-size: 11px; color: #3b5099; font-weight: 400; text-transform: none; letter-spacing: 0; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.expense-row { display: flex; align-items: center; margin-bottom: 12px; gap: 10px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.expense-icon { width: 32px; height: 32px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.expense-info { flex: 1; min-width: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.expense-name { font-size: 13px; color: #c8d4f0; font-weight: 500; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.expense-date { font-size: 11px; color: #4a5680; margin-top: 1px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.expense-amount { font-size: 14px; font-weight: 600; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.expense-bar-wrap { background: #1a2240; border-radius: 4px; height: 4px; flex: 1; overflow: hidden; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.expense-bar { height: 4px; border-radius: 4px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.inv-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 0.5px solid #1a2240; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.inv-row:last-child { border-bottom: none; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.inv-ticker { font-size: 13px; font-weight: 700; color: #4d82e8; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.inv-name { font-size: 11px; color: #4a5680; margin-top: 1px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.inv-right { text-align: right; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.inv-val { font-size: 13px; font-weight: 600; color: #e8ecf4; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.inv-pct { font-size: 11px; margin-top: 1px; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.savings-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.savings-label { font-size: 13px; color: #c8d4f0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.savings-date { font-size: 11px; color: #4a5680; margin-top: 1px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.savings-pct { font-size: 11px; color: #10b981; font-weight: 600; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.prog-wrap { background: #1a2240; border-radius: 6px; height: 6px; flex: 1; overflow: hidden; margin: 0 12px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.prog-bar { height: 6px; border-radius: 6px; transition: width 1s cubic-bezier(0.4,0,0.2,1); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.add-btn { background: #1a2040; border: 0.5px dashed #2a3a6a; border-radius: 10px; padding: 10px; text-align: center; font-size: 12px; color: #3b5099; cursor: pointer; transition: background 0.2s, color 0.2s; margin-top: 8px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.add-btn:hover { background: #1e2850; color: #5b7acc; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.chart-wrap { position: relative; height: 200px; }</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;💰 Mi Dashboard Financiero&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div style="display:flex; align-items:center; gap:12px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="date" id="currentDate"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="month-pill" onclick="sendPrompt('Actualiza el dashboard con datos de marzo 2025')"&gt;Abr 2025 ▾&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="metrics"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="card blue"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="accent"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="label"&gt;Balance total&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="value" id="balVal"&gt;$18,450&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="change up"&gt;▲ +3.2% vs mes anterior&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="card red"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="accent"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="label"&gt;Gastos del mes&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="value" id="expVal"&gt;$2,870&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="change down"&gt;▼ −5.1% vs meta&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="card green"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="accent"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="label"&gt;Inversiones&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="value" id="invVal"&gt;$9,200&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="change up"&gt;▲ +8.4% YTD&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="card amber"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="accent"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="label"&gt;Ahorros prog.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="value" id="savVal"&gt;$3,100&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="change neutral"&gt;● 62% meta mensual&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="grid2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="panel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="panel-title"&gt;Flujo mensual &lt;span&gt;Ingresos vs Gastos&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="chart-wrap"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;canvas id="flowChart"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="panel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="panel-title"&gt;Categorías de gasto &lt;span&gt;Abril 2025&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div style="display:flex; gap:16px; align-items:center;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="position:relative; width:110px; height:110px; flex-shrink:0;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;canvas id="donutChart" width="110" height="110"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="flex:1; font-size:12px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="margin-bottom:7px; display:flex; align-items:center; gap:7px;"&gt;&lt;span style="width:9px;height:9px;border-radius:2px;background:#1d4ed8;display:inline-block;"&gt;&lt;/span&gt;&lt;span style="color:#9aaad4;"&gt;Vivienda&lt;/span&gt;&lt;span style="margin-left:auto;color:#c8d4f0;font-weight:600;"&gt;34%&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="margin-bottom:7px; display:flex; align-items:center; gap:7px;"&gt;&lt;span style="width:9px;height:9px;border-radius:2px;background:#3b82f6;display:inline-block;"&gt;&lt;/span&gt;&lt;span style="color:#9aaad4;"&gt;Alimentos&lt;/span&gt;&lt;span style="margin-left:auto;color:#c8d4f0;font-weight:600;"&gt;22%&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="margin-bottom:7px; display:flex; align-items:center; gap:7px;"&gt;&lt;span style="width:9px;height:9px;border-radius:2px;background:#dc2626;display:inline-block;"&gt;&lt;/span&gt;&lt;span style="color:#9aaad4;"&gt;Transporte&lt;/span&gt;&lt;span style="margin-left:auto;color:#c8d4f0;font-weight:600;"&gt;15%&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="margin-bottom:7px; display:flex; align-items:center; gap:7px;"&gt;&lt;span style="width:9px;height:9px;border-radius:2px;background:#ef4444;display:inline-block;"&gt;&lt;/span&gt;&lt;span style="color:#9aaad4;"&gt;Ocio&lt;/span&gt;&lt;span style="margin-left:auto;color:#c8d4f0;font-weight:600;"&gt;12%&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="margin-bottom:7px; display:flex; align-items:center; gap:7px;"&gt;&lt;span style="width:9px;height:9px;border-radius:2px;background:#6b7a99;display:inline-block;"&gt;&lt;/span&gt;&lt;span style="color:#9aaad4;"&gt;Otros&lt;/span&gt;&lt;span style="margin-left:auto;color:#c8d4f0;font-weight:600;"&gt;17%&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="grid2b"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="panel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="panel-title"&gt;Gastos recientes &lt;span&gt;Últimos 5&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="expense-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="expense-icon" style="background:#1a2a5e;"&gt;🏠&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="expense-info"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="expense-name"&gt;Arriendo&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="expense-date"&gt;01 abr 2025&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="flex:1; margin:0 12px;"&gt;&lt;div class="expense-bar-wrap"&gt;&lt;div class="expense-bar" style="width:90%;background:#1d4ed8;"&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="expense-amount down"&gt;−$980&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="expense-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="expense-icon" style="background:#1a1a30;"&gt;🛒&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="expense-info"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="expense-name"&gt;Mercado&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="expense-date"&gt;03 abr 2025&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="flex:1; margin:0 12px;"&gt;&lt;div class="expense-bar-wrap"&gt;&lt;div class="expense-bar" style="width:45%;background:#3b82f6;"&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="expense-amount down"&gt;−$320&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="expense-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="expense-icon" style="background:#2a1a1a;"&gt;🚌&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="expense-info"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="expense-name"&gt;Transporte&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="expense-date"&gt;04 abr 2025&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="flex:1; margin:0 12px;"&gt;&lt;div class="expense-bar-wrap"&gt;&lt;div class="expense-bar" style="width:25%;background:#dc2626;"&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="expense-amount down"&gt;−$150&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="expense-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="expense-icon" style="background:#1a2a1a;"&gt;📚&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="expense-info"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="expense-name"&gt;Libros / academia&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="expense-date"&gt;04 abr 2025&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="flex:1; margin:0 12px;"&gt;&lt;div class="expense-bar-wrap"&gt;&lt;div class="expense-bar" style="width:18%;background:#059669;"&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="expense-amount down"&gt;−$95&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="expense-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="expense-icon" style="background:#2a1f10;"&gt;🎮&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="expense-info"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="expense-name"&gt;Ocio&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="expense-date"&gt;05 abr 2025&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="flex:1; margin:0 12px;"&gt;&lt;div class="expense-bar-wrap"&gt;&lt;div class="expense-bar" style="width:20%;background:#d97706;"&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="expense-amount down"&gt;−$60&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="add-btn" onclick="sendPrompt('Agrega un gasto nuevo al dashboard')"&gt;+ Agregar gasto&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div style="display:flex; flex-direction:column; gap:16px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="panel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="panel-title"&gt;Inversiones activas &lt;span&gt;Rendimiento YTD&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="inv-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;&lt;div class="inv-ticker"&gt;COL ETF&lt;/div&gt;&lt;div class="inv-name"&gt;BVC Colombia&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="inv-right"&gt;&lt;div class="inv-val"&gt;$4,100&lt;/div&gt;&lt;div class="inv-pct up"&gt;▲ +11.2%&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="inv-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;&lt;div class="inv-ticker"&gt;CDT 90D&lt;/div&gt;&lt;div class="inv-name"&gt;Vence 15 jun 2025&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="inv-right"&gt;&lt;div class="inv-val"&gt;$3,200&lt;/div&gt;&lt;div class="inv-pct up"&gt;▲ +7.5% EA&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="inv-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;&lt;div class="inv-ticker"&gt;FIDUCIA&lt;/div&gt;&lt;div class="inv-name"&gt;Fondo de liquidez&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="inv-right"&gt;&lt;div class="inv-val"&gt;$1,900&lt;/div&gt;&lt;div class="inv-pct neutral"&gt;● +4.1% EA&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="add-btn" onclick="sendPrompt('Agrega una nueva inversión al dashboard')"&gt;+ Agregar inversión&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="panel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="panel-title"&gt;Ahorros programados&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="savings-row" style="flex-direction:column; align-items:flex-start; gap:6px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="display:flex; justify-content:space-between; width:100%;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div&gt;&lt;div class="savings-label"&gt;Fondo de emergencia&lt;/div&gt;&lt;div class="savings-date"&gt;Próx. aporte: 15 abr&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="savings-pct"&gt;72%&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="display:flex; width:100%; align-items:center; gap:8px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="prog-wrap" style="margin:0;"&gt;&lt;div class="prog-bar" style="width:72%;background:linear-gradient(90deg,#1d4ed8,#3b82f6);"&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;span style="font-size:11px;color:#6b7a99;white-space:nowrap;"&gt;$1,800 / $2,500&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="margin-top:12px;" class="savings-row" style="flex-direction:column; align-items:flex-start; gap:6px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="display:flex; justify-content:space-between; width:100%;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div&gt;&lt;div class="savings-label"&gt;Viaje / meta personal&lt;/div&gt;&lt;div class="savings-date"&gt;Próx. aporte: 30 abr&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="savings-pct" style="color:#ef4444;"&gt;38%&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="display:flex; width:100%; align-items:center; gap:8px; margin-top:6px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="prog-wrap" style="margin:0;"&gt;&lt;div class="prog-bar" style="width:38%;background:linear-gradient(90deg,#dc2626,#ef4444);"&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;span style="font-size:11px;color:#6b7a99;white-space:nowrap;"&gt;$500 / $1,300&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="add-btn" onclick="sendPrompt('Agrega un nuevo ahorro programado al dashboard')" style="margin-top:10px;"&gt;+ Nueva meta de ahorro&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-CO', {weekday:'long', year:'numeric', month:'long', day:'numeric'});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const flowCtx = document.getElementById('flowChart').getContext('2d');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>new Chart(flowCtx, {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>type: 'bar',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>labels: ['Nov','Dic','Ene','Feb','Mar','Abr'],</p>
+<p class="p1"><span class="Apple-converted-space">      </span>datasets: [</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ label: 'Ingresos', data: [5200,5800,5000,5300,5500,5400], backgroundColor: 'rgba(29,78,216,0.75)', borderRadius: 5 },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{ label: 'Gastos', data: [3100,3800,2900,3100,3000,2870], backgroundColor: 'rgba(220,38,38,0.75)', borderRadius: 5 }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>]</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>responsive: true, maintainAspectRatio: false,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx =&gt; ' $' + ctx.parsed.y.toLocaleString() } } },</p>
+<p class="p1"><span class="Apple-converted-space">      </span>scales: {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#4a5680', font: { size: 11 } } },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#4a5680', font: { size: 11 }, callback: v =&gt; '$' + (v/1000).toFixed(0) + 'k' } }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const donutCtx = document.getElementById('donutChart').getContext('2d');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>new Chart(donutCtx, {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>type: 'doughnut',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>labels: ['Vivienda','Alimentos','Transporte','Ocio','Otros'],</p>
+<p class="p1"><span class="Apple-converted-space">      </span>datasets: [{ data: [34,22,15,12,17], backgroundColor: ['#1d4ed8','#3b82f6','#dc2626','#ef4444','#374151'], borderWidth: 0 }]</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>responsive: false, cutout: '68%',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx =&gt; ' ' + ctx.parsed + '%' } } }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const legend = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>legend.style.cssText = 'display:flex;gap:12px;margin-top:8px;flex-wrap:wrap;justify-content:center;';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>legend.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span style="display:flex;align-items:center;gap:4px;font-size:11px;color:#6b7a99;"&gt;&lt;span style="width:8px;height:8px;border-radius:2px;background:#1d4ed8;display:inline-block;"&gt;&lt;/span&gt;Ingresos&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span style="display:flex;align-items:center;gap:4px;font-size:11px;color:#6b7a99;"&gt;&lt;span style="width:8px;height:8px;border-radius:2px;background:#dc2626;display:inline-block;"&gt;&lt;/span&gt;Gastos&lt;/span&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.querySelector('.chart-wrap').after(legend);</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
